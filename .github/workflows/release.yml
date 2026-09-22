@@ -22,11 +22,11 @@ jobs:
           xcode-version: latest-stable
       # Don't cut a release on drifted conformance fixtures (the release path
       # must be no weaker than the PR/push fixtures-in-sync gate in ci.yml).
-      - name: Verify fixtures match appfeedback-spec
+      - name: Verify fixtures match loveletter-spec
         run: |
           set -euo pipefail
-          base=https://raw.githubusercontent.com/hayek/appfeedback-spec/main/fixtures
-          dir=Tests/AppFeedbackCoreTests/Fixtures/conformance
+          base=https://raw.githubusercontent.com/hayek/loveletter-spec/main/fixtures
+          dir=Tests/LoveLetterCoreTests/Fixtures/conformance
           for f in format-cases.json parse-cases.json; do
             curl -fsSL "$base/$f" -o "/tmp/$f"
             diff -u "/tmp/$f" "$dir/$f"

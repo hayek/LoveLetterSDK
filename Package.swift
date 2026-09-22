@@ -5,16 +5,16 @@ import class Foundation.ProcessInfo
 // swift-docc-plugin is a build-tool plugin used only to generate the DocC API
 // reference. A top-level package dependency is resolved into EVERY consumer's
 // graph (SwiftPM doesn't prune the resolution closure), so gate it behind an env
-// var — set APPFEEDBACK_BUILD_DOCS=1 in the docs-generation step — to keep it out
+// var — set LOVELETTER_BUILD_DOCS=1 in the docs-generation step — to keep it out
 // of adopters' checkouts. The docs site's regen script
-// (appfeedback-docs/scripts/regen-api-refs.sh) sets this when generating DocC.
-let buildingDocs = ProcessInfo.processInfo.environment["APPFEEDBACK_BUILD_DOCS"] != nil
+// (loveletter-docs/scripts/regen-api-refs.sh) sets this when generating DocC.
+let buildingDocs = ProcessInfo.processInfo.environment["LOVELETTER_BUILD_DOCS"] != nil
 let doccPluginDependencies: [Package.Dependency] = buildingDocs
     ? [.package(url: "https://github.com/apple/swift-docc-plugin", from: "1.4.0")]
     : []
 
 let package = Package(
-    name: "AppFeedbackSDK",
+    name: "LoveLetterSDK",
     platforms: [
         .iOS(.v17),
         .macOS(.v14),
@@ -23,24 +23,24 @@ let package = Package(
         .visionOS(.v1),
     ],
     products: [
-        .library(name: "AppFeedbackCore", targets: ["AppFeedbackCore"]),
-        .library(name: "AppFeedbackUI", targets: ["AppFeedbackUI"]),
+        .library(name: "LoveLetterCore", targets: ["LoveLetterCore"]),
+        .library(name: "LoveLetterUI", targets: ["LoveLetterUI"]),
     ],
     dependencies: doccPluginDependencies,
     targets: [
-        .target(name: "AppFeedbackCore"),
+        .target(name: "LoveLetterCore"),
         .target(
-            name: "AppFeedbackUI",
-            dependencies: ["AppFeedbackCore"]
+            name: "LoveLetterUI",
+            dependencies: ["LoveLetterCore"]
         ),
         .testTarget(
-            name: "AppFeedbackCoreTests",
-            dependencies: ["AppFeedbackCore"],
+            name: "LoveLetterCoreTests",
+            dependencies: ["LoveLetterCore"],
             resources: [.copy("Fixtures")]
         ),
         .testTarget(
-            name: "AppFeedbackUITests",
-            dependencies: ["AppFeedbackUI"]
+            name: "LoveLetterUITests",
+            dependencies: ["LoveLetterUI"]
         ),
     ]
 )

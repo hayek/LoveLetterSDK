@@ -4,7 +4,7 @@ Apple's SwiftPM distributes packages by **git tag** — there's no registry to
 publish to. Consumers point at the repo and pin a version:
 
 ```swift
-.package(url: "https://github.com/hayek/AppFeedbackSDK", from: "0.1.0"),
+.package(url: "https://github.com/hayek/LoveLetterSDK", from: "0.1.0"),
 ```
 
 ## Cut a release

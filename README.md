@@ -1,23 +1,23 @@
-# AppFeedbackSDK
+# LoveLetterSDK
 
-[![CI](https://github.com/hayek/AppFeedbackSDK/actions/workflows/ci.yml/badge.svg)](https://github.com/hayek/AppFeedbackSDK/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![CI](https://github.com/hayek/LoveLetterSDK/actions/workflows/ci.yml/badge.svg)](https://github.com/hayek/LoveLetterSDK/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-A small Swift package that lets your app submit feedback (bugs / feature requests) to a GitHub repository in the exact body format the [AppFeedback](https://github.com/hayek/AppFeedback) inbox parses.
+A small Swift package that lets your app submit feedback (bugs / feature requests) to a GitHub repository in the exact body format the [Love Letter](https://github.com/hayek/LoveLetter) inbox parses.
 
-This is the **Apple** SDK and the reference implementation for the [AppFeedback family](https://hayek.github.io/appfeedback-docs/) — the [Android](https://github.com/hayek/appfeedback-android) and [Web](https://github.com/hayek/appfeedback-web) SDKs produce a byte-identical issue body, kept in lockstep by the [`appfeedback-spec`](https://github.com/hayek/appfeedback-spec) golden fixtures.
+This is the **Apple** SDK and the reference implementation for the [Love Letter family](https://hayek.github.io/loveletter-docs/) — the [Android](https://github.com/hayek/loveletter-android) and [Web](https://github.com/hayek/loveletter-web) SDKs produce a byte-identical issue body, kept in lockstep by the [`loveletter-spec`](https://github.com/hayek/loveletter-spec) golden fixtures.
 
-- **AppFeedbackCore** — headless: `FeedbackClient`, transports, body formatter, body parser, multi-platform device info.
-- **AppFeedbackUI** — drop-in SwiftUI sheet (`FeedbackSheet`) with type selector, validation, success animation. Themeable accent + copy.
+- **LoveLetterCore** — headless: `FeedbackClient`, transports, body formatter, body parser, multi-platform device info.
+- **LoveLetterUI** — drop-in SwiftUI sheet (`FeedbackSheet`) with type selector, validation, success animation. Themeable accent + copy.
 
 Platforms: iOS 17 · macOS 14 · watchOS 10 · tvOS 17 · visionOS 1.
 
-📖 Docs: <https://hayek.github.io/appfeedback-docs/> · API reference: <https://hayek.github.io/appfeedback-docs/reference/swift/documentation/>
+📖 Docs: <https://hayek.github.io/loveletter-docs/> · API reference: <https://hayek.github.io/loveletter-docs/reference/swift/documentation/>
 
 ## Quick start
 
 ```swift
-import AppFeedbackCore
-import AppFeedbackUI
+import LoveLetterCore
+import LoveLetterUI
 
 // 1. Build a client once at app start.
 let feedback = FeedbackClient(
@@ -136,7 +136,7 @@ Device: <model>
 👍 Votes: 0
 ```
 
-Labels: `[type.rawValue, "user-submitted"]`. The AppFeedback inbox uses `AppFeedbackCore.IssueBodyParser` to read this back, so the two ends can never drift.
+Labels: `[type.rawValue, "user-submitted"]`. The Love Letter inbox uses `LoveLetterCore.IssueBodyParser` to read this back, so the two ends can never drift.
 
 ## Localizing the sheet
 
@@ -164,7 +164,7 @@ let theme = FeedbackTheme(
 2. **XOR-obfuscate at rest, decode at runtime.** Raises the bar slightly. Anyone determined still wins.
 3. **Server-side relay.** Point the SDK at an endpoint you control; your server holds the PAT, rate-limits, verifies an optional CAPTCHA, and mirrors to GitHub. This is the only path that actually contains the blast radius.
 
-The SDK ships a concrete `RelayTransport` for option 3 — wire-compatible with the same relays the AppFeedback Web and Android SDKs target:
+The SDK ships a concrete `RelayTransport` for option 3 — wire-compatible with the same relays the Love Letter Web and Android SDKs target:
 
 ```swift
 let transport = RelayTransport(
@@ -184,23 +184,23 @@ If you have the SDK checked out alongside your app:
 **XcodeGen `project.yml`:**
 ```yaml
 packages:
-  AppFeedbackSDK:
-    path: ../AppFeedbackSDK
+  LoveLetterSDK:
+    path: ../LoveLetterSDK
 targets:
   YourApp:
     dependencies:
-      - package: AppFeedbackSDK
-        product: AppFeedbackCore
-      - package: AppFeedbackSDK
-        product: AppFeedbackUI
+      - package: LoveLetterSDK
+        product: LoveLetterCore
+      - package: LoveLetterSDK
+        product: LoveLetterUI
 ```
 
-**Hand-managed Xcode project:** File → Add Package Dependencies → Add Local… → select the `AppFeedbackSDK` directory → choose `AppFeedbackCore` and (optionally) `AppFeedbackUI`, link both to your app target.
+**Hand-managed Xcode project:** File → Add Package Dependencies → Add Local… → select the `LoveLetterSDK` directory → choose `LoveLetterCore` and (optionally) `LoveLetterUI`, link both to your app target.
 
 ### Remote (Swift Package Manager)
 
 ```swift
-.package(url: "https://github.com/hayek/AppFeedbackSDK", from: "0.1.0"),
+.package(url: "https://github.com/hayek/LoveLetterSDK", from: "0.1.0"),
 ```
 
 ## Migrating an existing in-tree implementation
@@ -224,9 +224,9 @@ DEVELOPER_DIR=/Applications/Xcode-26.5.0.app/Contents/Developer xcrun swift test
 
 ## Status
 
-- **v0.1** ✓ — `AppFeedbackCore`: client, transport protocol, GitHub direct transport, formatter, parser, device info, errors.
-- **v0.2** ✓ — `AppFeedbackUI`: themeable `FeedbackSheet`.
-- **v0.3** ✓ — AppFeedback inbox consumes `AppFeedbackCore.IssueBodyParser` (single source of truth).
+- **v0.1** ✓ — `LoveLetterCore`: client, transport protocol, GitHub direct transport, formatter, parser, device info, errors.
+- **v0.2** ✓ — `LoveLetterUI`: themeable `FeedbackSheet`.
+- **v0.3** ✓ — Love Letter inbox consumes `LoveLetterCore.IssueBodyParser` (single source of truth).
 - **v1.0** — `RelayTransport` ✓ (relay-contract wire-compatible with the Web/Android SDKs). Attachments (screenshots, logs) ✓ — validated and preprocessed client-side, uploaded by `GitHubDirectTransport` (committed to a branch via the GitHub Contents API), and written into / parsed back out of the issue body's `attachments-v1` block. Remaining gap: `RelayTransport` does not yet forward attachments — relay-path uploads are tracked separately.
 
 ## License

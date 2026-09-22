@@ -11,6 +11,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Breaking: the SDK is now Love Letter.** The package, its products and its
+  modules have been renamed:
+
+  | Before | After |
+  |---|---|
+  | package `AppFeedbackSDK` (`github.com/hayek/AppFeedbackSDK`) | `LoveLetterSDK` (`github.com/hayek/LoveLetterSDK`) |
+  | `import AppFeedbackCore` | `import LoveLetterCore` |
+  | `import AppFeedbackUI` | `import LoveLetterUI` |
+  | `APPFEEDBACK_BUILD_DOCS` (docs-generation env var) | `LOVELETTER_BUILD_DOCS` |
+
+  Type names (`FeedbackClient`, `FeedbackSheet`, `RelayTransport`, …) and the
+  issue-body wire format are unchanged, so issues filed by older builds still
+  parse and the Android and Web SDKs stay byte-identical. To migrate:
+
+  1. Point your package dependency at
+     `.package(url: "https://github.com/hayek/LoveLetterSDK", from: …)` (the old
+     URL redirects, but SwiftPM identifies packages by URL, so update it). For
+     XcodeGen or a local path, rename the package key and path to
+     `LoveLetterSDK` / `../LoveLetterSDK`.
+  2. Link the `LoveLetterCore` and `LoveLetterUI` products instead of
+     `AppFeedbackCore` and `AppFeedbackUI`.
+  3. Replace `import AppFeedbackCore` / `import AppFeedbackUI` with
+     `import LoveLetterCore` / `import LoveLetterUI`, and any module-qualified
+     references such as `AppFeedbackCore.IssueBodyParser` with
+     `LoveLetterCore.IssueBodyParser`.
+  4. If your docs pipeline sets `APPFEEDBACK_BUILD_DOCS`, set
+     `LOVELETTER_BUILD_DOCS` instead.
+
+  Docs moved to <https://hayek.github.io/loveletter-docs/>.
+
 ### Fixed
 
 ## [0.8.0] - 2026-09-02
