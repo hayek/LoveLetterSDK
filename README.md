@@ -1,3 +1,7 @@
+<p align="center">
+  <img src=".github/assets/icon.png" width="128" height="128" alt="Love Letter icon">
+</p>
+
 # LoveLetterSDK
 
 [![CI](https://github.com/hayek/LoveLetterSDK/actions/workflows/ci.yml/badge.svg)](https://github.com/hayek/LoveLetterSDK/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
