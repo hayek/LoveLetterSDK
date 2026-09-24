@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
+## [0.9.0] - 2026-09-24
 
 ### Changed
 
@@ -40,8 +40,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
      `LOVELETTER_BUILD_DOCS` instead.
 
   Docs moved to <https://hayek.github.io/loveletter-docs/>.
-
-### Fixed
 
 ## [0.8.0] - 2026-09-02
 
