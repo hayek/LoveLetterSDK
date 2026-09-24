@@ -318,6 +318,7 @@ public struct FeedbackSheet: View {
                     emailCard
                     attachmentsCard
                     privacyNotice
+                    poweredBy
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 24)
@@ -634,6 +635,22 @@ public struct FeedbackSheet: View {
             RoundedRectangle(cornerRadius: 9, style: .continuous)
                 .fill(Color.secondary.opacity(0.07))
         )
+    }
+
+    /// Brand attribution, deliberately not part of `theme.copy`: it names the product,
+    /// so it reads the same in every locale.
+    private var poweredBy: some View {
+        Link(destination: URL(string: "https://amirhayek.dev/LoveLetter/")!) {
+            HStack(spacing: 4) {
+                Image(systemName: "heart.fill")
+                    .font(.system(size: 9, weight: .semibold))
+                Text(verbatim: "Powered by Love Letter")
+                    .font(.system(size: 11, weight: .medium))
+            }
+            .foregroundStyle(.secondary)
+        }
+        .buttonStyle(.plain)
+        .frame(maxWidth: .infinity)
     }
 
     // MARK: - Footer

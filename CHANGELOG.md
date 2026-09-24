@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- A "Powered by Love Letter" link at the bottom of `FeedbackSheet`, opening
+  https://amirhayek.dev/LoveLetter/.
+
 ## [0.9.0] - 2026-09-24
 
 ### Changed
