@@ -204,7 +204,7 @@ targets:
 ### Remote (Swift Package Manager)
 
 ```swift
-.package(url: "https://github.com/hayek/LoveLetterSDK", from: "0.9.0"),
+.package(url: "https://github.com/hayek/LoveLetterSDK", from: "0.10.0"),
 ```
 
 ## Migrating an existing in-tree implementation
